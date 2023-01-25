@@ -45,6 +45,19 @@ services:
   socketi:
 ```
 
+### Mini-io
+```yaml
+  s3:
+    type: compose
+    services:
+      image: bitnami/minio:latest
+      command:
+        - /opt/bitnami/scripts/minio/entrypoint.sh
+        - /opt/bitnami/scripts/minio/run.sh
+      environment:
+        MINIO_DEFAULT_BUCKETS: "default:public,test:public"
+```
+
 ## Recipes
 
 ### CraftCMS
