@@ -47,6 +47,34 @@ services:
 
 ## Recipes
 
+### CraftCMS
+```yaml
+name: mycraftsite
+recipe: lamp
+config:
+  webroot: web
+  php: "8.0"
+  
+services:
+  node:
+    type: node:16
+    build:
+      - "cd $LANDO_MOUNT && yarn"
+  mail:
+    type: mailhog
+    
+tooling:
+  node:
+    service: node
+  npm:
+    service: node
+  yarn:
+    service: node
+  craft:
+    service: appserver
+    cmd: php craft
+ ```
+
 ## Tooling
  
 ### [Database tools](https://github.com/tanc/lando-db-tools)
@@ -58,4 +86,15 @@ The intention of the plugin is to make working with Lando database containers an
 3. `lando dbeaver` - opens a connection using the dbeaver GUI
 
 Currently TablePlus and Sequelpro/sequelace are in a pull request and avaialable on our fork: https://github.com/phpsa/lando-db-tools
+
+## Extra Services / Tips
+
+### wkhtmltopdf
+
+```yaml
+services:
+ appserver:
+    build_as_root:
+      - "wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-2/wkhtmltox_0.12.6.1-2.bullseye_amd64.deb && apt install -y ./wkhtmltox_0.12.6.1-2.bullseye_amd64.deb && rm ./wkhtmltox_0.12.6.1-2.bullseye_amd64.deb"
+```
 
