@@ -1,5 +1,7 @@
 # Lando-Custom-Recipes-Tools-Services
 
+[_TOC_]
+
 ## Services
 
 ### [Socketi](https://docs.soketi.app/):
@@ -46,3 +48,14 @@ services:
 ## Recipes
 
 ## Tooling
+ 
+### [Database tools](https://github.com/tanc/lando-db-tools)
+
+The intention of the plugin is to make working with Lando database containers and external tools a little easier. The plugin comes with three Lando 'tasks':
+
+1. `lando dbport` - prints the external port and copies it to the clipboard
+2. `lando workbench` - opens a connection using the MySQL Workbench GUI
+3. `lando dbeaver` - opens a connection using the dbeaver GUI
+
+Currently TablePlus and Sequelpro/sequelace are in a pull request and avaialable on our fork: https://github.com/phpsa/lando-db-tools
+
