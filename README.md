@@ -26,6 +26,43 @@ services:
       - chmod a+x /start
 ```
 
+### Unleash
+```yaml
+services:
+  unleashdb:
+    type: postgres
+    portforward: true
+    creds:
+      database: unleash
+
+  unleash:
+    type: compose
+    app_mount: false
+    portforward: true
+    ssl: true
+    services:
+      image: unleashorg/unleash-server
+      depends_on:
+        - unleashdb
+      ports:
+        - "4242:443"
+      environment:
+        UNLEASH_URL: "unleash.towardstruth.lndo.site"
+        DATABASE_HOST: "unleashdb"
+        DATABASE_NAME: "unleash"
+        DATABASE_USERNAME: "postgres"
+        DATABASE_PASSWORD: "user"
+        DATABASE_PORT: 5432
+        DATABASE_SSL: "false"
+        # username: admin
+        # password: unleash4all
+      command: "node index.js"
+      
+  proxy:
+    unleash:
+    - unleash.towardstruth.lndo.site:4242
+```
+
 ### [Meilisearch](https://www.meilisearch.com/)
 ```yaml
 services:
